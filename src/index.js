@@ -4,6 +4,4 @@ import App from './Components/App';
 import './index.css';
 import './assets/css/functional.css';
 
-
 ReactDOM.render(<App />, document.getElementById('root'));
-
