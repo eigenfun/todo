@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Button, Navbar, Nav, FormControl, Form } from "react-bootstrap"
+import {Redirect} from 'react-router-dom';
+import { Container, Button, Navbar, Nav, Form } from "react-bootstrap"
 import TaskCreateModal from "../TaskActions/NewTask"
 import dateFormat from "dateformat"
 import axios from 'axios';
@@ -36,37 +37,33 @@ export default class AppMain extends React.Component {
     this.markDone()
   }
 
-  getTodos = () => {
-    console.log(this.state.token)
+  getTodos = async () => {
     var bearer = `Bearer ${this.state.token}`;
-    fetch("http://localhost:4000/api/tasks", {
-    crossDomain:true,
-    headers: {
-        'authorization': bearer,
-        "Content-Type": "application/json"
-    }})
-      .then(res => {
-        console.log(res.status)
-        if (res.status === 401) {
-          this.setState({logged_in: false})
-        }
-        return res.json()
-      })
-      .then(
-        (result) => {
-          console.log(result)
-          this.setState({
-            isLoaded: true,
-            data: result
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            data: []
-          });
-        }
-      )
+    console.log('bearer is: ' + bearer)
+
+    var config = getAuthConfig()
+
+    try {
+      const res = await axios.get("http://localhost:4000/api/tasks", config);
+      console.log(res);
+      if (res.status === 403) {
+        console.log(">>> NO AUTH <<<" + res.status)
+        this.setState({logged_in: false})
+      } else {
+        console.log(res)
+        this.setState({
+          isLoaded: true,
+          data: res.data
+        })
+      }
+    } catch (error) {
+      console.error(error);
+      this.setState({
+        isLoaded: true,
+        data: [],
+        logged_in: false
+      });
+    }
   }
 
   find_id = (event) => {
@@ -126,6 +123,7 @@ export default class AppMain extends React.Component {
   render() {
     const { data } = this.state;
     return (
+      this.state.logged_in ?
       <Container>
           <link rel="stylesheet" 
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
@@ -152,7 +150,8 @@ export default class AppMain extends React.Component {
           columns={[
             {
               Header: "Task",
-              accessor: "task",
+              id: "task",
+              accessor: t => t.task + " \u2713",
               headerStyle: {textAlign: 'left'}
             },
             {
@@ -178,7 +177,7 @@ export default class AppMain extends React.Component {
               accessor: '_id',
               Cell: props => (
                 <span>
-                  <Button variant="primary" data-tag={props.original._id}
+                  <Button variant="success" data-tag={props.original._id}
                       onClick={this.handleDone} task_state={props.original.status}> 
                       Done
                   </Button>
@@ -214,8 +213,9 @@ export default class AppMain extends React.Component {
             this.getTodos()
           }}
         />
-
       </Container>
+      :
+      <Redirect to={{ pathname: "/login" }} />
     );
   }
 }

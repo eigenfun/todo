@@ -10,8 +10,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       logged_in: false, 
-      token: ''
+      token: localStorage.getItem('token')
     }
+    console.log(this.state.token)
   }
 
   setToken = (token) => {
@@ -28,9 +29,9 @@ class App extends React.Component {
     <Router token={this.state.token}>
       <div className={styles.app}>
         <AppContent>
+          <Route path='/' component={AppMain} />  
           <Route path='/login' component={Login} />
           <Route path='/tasklist' component={AppMain} />
-          <Redirect to='/login' />
         </AppContent>
         <Route path="/logout" render={() => {
           this.logout()

@@ -11,9 +11,11 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalShow: false
+      modalShow: false,
+      token: localStorage.getItem('token')
     };
   }
+
 
   handleSubmit = async e => {
     e.preventDefault();
@@ -69,8 +71,6 @@ export default class Login extends React.Component {
           }}
         />
       </Container>
-
     );
   }
-
 }

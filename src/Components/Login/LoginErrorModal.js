@@ -28,7 +28,7 @@ class LoginErrorModal extends React.Component {
           <Modal.Body>
               <Container> 
               <Row>
-              <Col>     
+              <Col style={{color: 'red'}}>     
                 Incorrect login or password!
               </Col>
               </Row>

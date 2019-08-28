@@ -15,6 +15,17 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.get('/api/tokenvery/:token', async (req, res, next) => {
+  jwt.verify(req.params.token, JWT_SECRET, (err, token) => {
+    if (err) {
+      return res.sendStatus(403);
+    } else {
+      console.log(req.token);
+      res.status(200).json({ login: 'ok' });
+    }
+  });
+})
+
 app.use(function(req, res, next) {
   console.log(req.path);
   if (req.path === '/api/login') return next();
