@@ -1,6 +1,8 @@
 # Install and Run
 
-This is a project based on the MERN (Mongo/Express/React/Node) stack. MongoDB should be installed in the localhost as an external dependency. 
+This is a project based on the MERN (Mongo/Express/React/Node) stack. 
+MongoDB should be installed in the localhost as an external dependency. It needs to be prepopulated with a users collection with docs that have {email, password_hash} for login
+
 To install the application:
 
    - Clone the repo
