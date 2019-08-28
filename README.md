@@ -6,7 +6,7 @@ To install the application:
    - Clone the repo
    - cd into the root directory
    - Run `npm install`
-   - Run the ui: `npm start`
-   - Run the server: `node server.js`
+   - Run the ui from the root directory: `npm start`
+   - Run the server: `node backend/server.js`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
