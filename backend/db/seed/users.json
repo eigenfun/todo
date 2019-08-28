@@ -1,5 +1,5 @@
 {
 	"_id" : ObjectId("5d5f220bbcdae093781d17b8"),
-	"email" : "nkamal@gmail.com",
-	"password_hash" : "sha1$b1f62f8e$1$b97f96d3c297e2f58e12563cf923a28df640a938"
+	"email" : "test@hcs.com",
+	"password_hash" : "sha1$d10c67ec$1$fd2ab20b8570a61b226c9faafa34b985345e0a6c"
 },
