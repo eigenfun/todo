@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './Login.module.css';
-
+import LoginErrorModal from './LoginErrorModal'
 import { Container, Button, Form } from "react-bootstrap"
 
 const api_base = "http://localhost:4000"
-
 
 
 export default class Login extends React.Component {
@@ -12,7 +11,7 @@ export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: this.context
+      modalShow: false
     };
   }
 
@@ -33,11 +32,17 @@ export default class Login extends React.Component {
           password: password.value
         })
       }).then(res => res.json());
-      localStorage.setItem('token', data.token);
-      this.props.history.push('/tasklist')
 
+      console.log(data.token);
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        this.props.history.push('/tasklist')
+      } else {
+        this.setState({modalShow: true});
+      }
     } catch (err) {
       console.log(err);
+      this.setState({modalShow: true})
     }
   }
 
@@ -56,7 +61,15 @@ export default class Login extends React.Component {
           </div>
           <Button type='submit' onSubmit={this.handleSubmit}>Login</Button>
         </Form>
+
+        <LoginErrorModal
+          show={this.state.modalShow}
+          onHide={() => {
+            this.setState({modalShow: false})
+          }}
+        />
       </Container>
+
     );
   }
 
