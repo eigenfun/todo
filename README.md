@@ -1,7 +1,9 @@
 # Install and Run
 
 This is a project based on the MERN (Mongo/Express/React/Node) stack. 
-MongoDB should be installed in the localhost as an external dependency. It needs to be prepopulated with a users collection with docs that have {email, password_hash} for login
+
+MongoDB should be installed in the localhost as an external dependency. It needs to be prepopulated with a users collection with docs that have {email, password_hash} for login. The seed data can be loaded into local mongo db from the seed directory in backend/db.
+It has the test user/password: test@hcs.com / todo
 
 To install the application:
 
