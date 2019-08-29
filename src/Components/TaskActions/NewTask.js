@@ -68,9 +68,7 @@ class TaskCreateModal extends React.Component {
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Task Name</Form.Label>
                 <Form.Control type="text" placeholder="Task" onChange={this.handleChange} name="task" />
-                <Form.Text className="text-muted">
-                  Rememer to create a task that is SMART
-                </Form.Text>
+
               </Form.Group>
               </Col>
               </Row>
@@ -96,7 +94,7 @@ class TaskCreateModal extends React.Component {
               <Row>
               <Col>
                 <Form.Label>Notes</Form.Label>
-                <Form.Control as="textarea" rows="3" />
+                <Form.Control as="textarea" rows="3" onChange={this.handleChange} name="notes" />
               </Col>
               </Row>
               </Container>
