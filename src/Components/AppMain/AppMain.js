@@ -28,12 +28,12 @@ export default class AppMain extends React.Component {
   }
 
   componentDidMount() {
-    console.log('in mount')
     this.getTodos()
     this.markDone()
   }
 
   componentDidUpdate() {
+    
     this.markDone()
   }
 
@@ -151,7 +151,7 @@ export default class AppMain extends React.Component {
             {
               Header: "Task",
               id: "task",
-              accessor: t => t.task + " \u2713",
+              accessor: t => t.task + (t.status == 'done' ? " \u2713" : ""),
               headerStyle: {textAlign: 'left'}
             },
             {

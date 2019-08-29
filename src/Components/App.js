@@ -29,7 +29,10 @@ class App extends React.Component {
     <Router token={this.state.token}>
       <div className={styles.app}>
         <AppContent>
-          <Route path='/' component={AppMain} />  
+          <Route path='/' render={() => {
+            return <Redirect to={{ pathname: "/tasklist" }} />;
+          }} />
+
           <Route path='/login' component={Login} />
           <Route path='/tasklist' component={AppMain} />
         </AppContent>
